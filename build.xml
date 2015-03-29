@@ -1,0 +1,42 @@
+<project name="jarsearch" default="test" basedir=".">
+  <property name="dist" value="${basedir}/dist"/>
+  <property name="build" value="${basedir}/classes"/>
+  <property name="src" value="${basedir}/src"/>
+  <property name="testjardir" value="${src}/org/mathison/util/test/jars"/>
+  <property name="testjardest" value="${build}/org/mathison/util/test/jars"/>
+  
+  <target name="jar" depends="clean,compile">
+    <mkdir dir="${dist}"/>
+    <jar basedir="${build}" 
+	 destfile="${dist}/jarsearch.jar" 
+	 includes="org/mathison/util/*.class" 
+	 manifest="${basedir}/mainFileSpec"/>
+  </target>
+  
+  <target name="compile">
+    <mkdir dir="${build}"/>
+    <javac srcdir="${src}" 
+           destdir="${build}"
+	     compiler="modern"
+	     debug="on"/>
+      <copy todir="${testjardest}" >
+	<fileset dir="${testjardir}"/>
+      </copy>
+  </target>
+  
+  <target name="test" depends="compile">
+    <junit  haltonerror="on">
+      <classpath>
+	<pathelement path="${build}"/>
+      </classpath>
+      <test name="org.mathison.util.test.TestJarsSearch" outfile="result" >
+	<formatter  type="xml"/>
+      </test>
+    </junit>
+  </target>
+  
+  <target name="clean">
+    <delete dir="${dist}"/>
+    <delete dir="${build}"/>
+  </target>
+</project>
