@@ -2,7 +2,7 @@
   <property name="dist" value="${basedir}/dist"/>
   <property name="build" value="${basedir}/classes"/>
   <property name="src" value="${basedir}/src"/>
-  <property name="testjardir" value="${src}/org/mathison/util/test/jars"/>
+  <property name="testjardir" value="/src/main/java/org/mathison/util/test/jars"/>
   <property name="testjardest" value="${build}/org/mathison/util/test/jars"/>
   
   <target name="jar" depends="clean,compile">
@@ -29,7 +29,7 @@
       <classpath>
 	<pathelement path="${build}"/>
       </classpath>
-      <test name="org.mathison.util.test.TestJarsSearch" outfile="result" >
+      <test name="org.mathison.util.TestJarsSearch" outfile="result" >
 	<formatter  type="xml"/>
       </test>
     </junit>
